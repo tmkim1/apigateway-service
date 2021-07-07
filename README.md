@@ -20,6 +20,7 @@ Spring Cloud Gateway
   <details>
   <summary>predicate 형태</summary>
   <pre>
+  1. yml파일 설정인 경우
   <code>
   spring:
    application:
@@ -38,6 +39,30 @@ Spring Cloud Gateway
   </code>
   </pre>
   
+  <pre>
+  2. JAVA Code로 설정하는 경우
+  <code>
+  @Configuration
+  public class FilterConfig {
+      // r -> r.path("/first-service/**" 해당 관련 요청이 들어오면
+      // .uri("http://localhost:8081") 설정한 uri 호출
+
+      @Bean
+      public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
+          return builder.routes()
+                  .route(r -> r.path("/first-service/**")
+                              .filters(f -> f.addRequestHeader("first-request","first-request-header")
+                                             .addResponseHeader("first-response","first-response-header"))
+                              .uri("http://localhost:8081"))
+                  .route(r -> r.path("/second-service/**")
+                          .filters(f -> f.addRequestHeader("second-request","second-request-header")
+                                  .addResponseHeader("second-response","second-response-header"))
+                          .uri("http://localhost:8082"))
+                  .build();
+      }
+  }
+  </code>
+  </pre>
   </details>
   
    
