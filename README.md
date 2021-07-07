@@ -8,4 +8,30 @@ SpringCloudGateway
   .이러한 환경 구축에 따라 인증, 권한 부여, 서비스 검색 통합, 부하 분산 등에 장점이 생김 
   
 #Spring Cloude Server 
-- ㅆomcat이 아닌 Netty라는 비동기 서버가 작동 됨
+- Tomcat이 아닌 Netty라는 비동기 서버가 작동 됨
+
+
+                                -> fisrtService
+Client -> Spring Cloud GateWay 
+                                -> secondService
+                                
+Spring Cloud Gateway 
+  - predicate: 조건 분기 (Client 요청에 따라 predicate에 정의된 조건에 맞는 service를 호출한다. 
+
+   spring:
+   application:
+     name: apigateway-service
+   cloud:
+     gateway:
+       routes:
+         - id: first-service
+           uri: http://localhost:8081/
+           predicates:
+             - Path=/first-service/**
+         - id: second-service
+           uri: http://localhost:8082/
+           predicates:
+             - Path=/second-service/**
+
+
+
