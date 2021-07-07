@@ -19,6 +19,9 @@ Spring Cloud Gateway
   - predicate: 조건 분기 (Client 요청에 따라 predicate에 정의된 조건에 맞는 service를 호출한다. 
   <details>
   <summary>predicate 형태</summary>
+  <pre>
+  <code>
+  {
   spring:
    application:
      name: apigateway-service
@@ -33,6 +36,10 @@ Spring Cloud Gateway
            uri: http://localhost:8082/
            predicates:
              - Path=/second-service/**
+  }
+  </code>
+  </pre>
+  
   </details>
   
    
