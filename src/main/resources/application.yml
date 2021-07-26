@@ -9,6 +9,11 @@ eureka:
 spring:
   application:
     name: apigateway-services
+  ribbitmq:
+    host: 127.0.0.1
+    port: 5672
+    userName: guest
+    password: guest
   cloud:
     gateway:
       default-filters:
@@ -85,11 +90,11 @@ spring:
                 proLogger: true
                 postLogger: true
 
-token:
-  secret: usertoken
+#token:
+#  secret: usertoken
 
 management:
   endpoints:
     web:
       exposure:
-        include: refresh, health, beans, httptrace
+        include: refresh, health, beans, httptrace, busrefresh
